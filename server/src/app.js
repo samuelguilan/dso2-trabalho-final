@@ -8,21 +8,10 @@ import bodyParser from 'body-parser'
 import * as db from './db'
 
 const app = express()
-const dados = [
-	{
-		valor: 12,
-		nivel: 'baixo'
-	},
-	{
-		valor: 180,
-		nivel: 'baixo'
-	},
-	{
-		valor: 120,
-		nivel: 'baixo'
-	}
-]
-var dadoObservado;
+const dados = {
+	valor: 12,
+	nivel: 'baixo'
+};
 
 app.use(bodyParser.json())
 
@@ -41,7 +30,7 @@ app.get('/disconnect', (req, res) => db.disconnect(res))
 app.get('/dados', (req, res) => {
 	try {
 		if(dados != undefined)
-			res.send(dadoObservado)
+			res.send(dados)
 	} catch(err) {
 		return res.status(400).send({error: 'erro ao mostrar dado' })
 
@@ -55,8 +44,7 @@ app.post('/dado', (req,res) => {
 			nivel: req.body.nivel
 		}
 		console.log(req)
-		dadoObservado = dado;
-		dados.push(dado)
+		dados = dado;
 		return res.status(200).send({success: 'sucesso!'})
 	} catch(err) {
 		return res.status(400).send({error: 'erro ao inserir dado' })
