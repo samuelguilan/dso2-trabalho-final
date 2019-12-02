@@ -2,7 +2,7 @@
   "name": "dso2-trabalho-final",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon --exec npx babel-node src/app.js",
     "build": "babel src -d build",

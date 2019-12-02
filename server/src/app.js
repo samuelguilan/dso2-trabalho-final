@@ -22,6 +22,7 @@ const dados = [
 		nivel: 'baixo'
 	}
 ]
+var dadoObservado;
 
 app.use(bodyParser.json())
 
@@ -40,7 +41,7 @@ app.get('/disconnect', (req, res) => db.disconnect(res))
 app.get('/dados', (req, res) => {
 	try {
 		if(dados != undefined)
-			res.send(dados)
+			res.send(dadoObservado)
 	} catch(err) {
 		return res.status(400).send({error: 'erro ao mostrar dado' })
 
@@ -54,6 +55,7 @@ app.post('/dado', (req,res) => {
 			nivel: req.body.nivel
 		}
 		console.log(req)
+		dadoObservado = dado;
 		dados.push(dado)
 		return res.status(200).send({success: 'sucesso!'})
 	} catch(err) {
