@@ -1,6 +1,6 @@
 import { PORT } from './env'
 
-import http from 'http'
+import https from 'https'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
@@ -12,6 +12,13 @@ var dados = {
 	valor: 12,
 	nivel: 'baixo'
 };
+
+const opcoes = {
+    key: fs.readFileSync(path.resolve(__dirname, '../certs/server_private_key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, '../certs/server_crt.pem')),
+    ca: fs.readFileSync(path.resolve(__dirname, '../certs/cert_crt.pem'))
+}
+
 
 app.use(bodyParser.json())
 
@@ -52,6 +59,6 @@ app.post('/dado', (req,res) => {
 	}
 })
 
-const server = http.createServer(app)
+const server = https.createServer(opcoes, app)
 
 server.listen(PORT, () => console.log(`No ar, porta ${PORT}...`))

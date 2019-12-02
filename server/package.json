@@ -4,10 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nuxt",
-    "start": "nuxt start",
-    "build": "nuxt build",
-    "heroku-postbuld": "npm run build",
+    "start": "nodemon --exec npx babel-node src/app.js",
+    "build": "babel src -d build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
