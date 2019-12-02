@@ -8,7 +8,7 @@ import bodyParser from 'body-parser'
 import * as db from './db'
 
 const app = express()
-const dados = {
+var dados = {
 	valor: 12,
 	nivel: 'baixo'
 };
